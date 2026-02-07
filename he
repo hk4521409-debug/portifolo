@@ -1,0 +1,56 @@
+// Typing animation
+const roles = ["Student", "Developer", "Tech Enthusiast"];
+let i = 0, j = 0, current = "", isDeleting = false;
+const typing = document.getElementById("typing");
+
+function type() {
+  current = roles[i];
+  if (isDeleting) {
+    typing.textContent = current.substring(0, j--);
+    if (j < 0) { isDeleting = false; i = (i + 1) % roles.length; }
+  } else {
+    typing.textContent = current.substring(0, j++);
+    if (j > current.length) isDeleting = true;
+  }
+  setTimeout(type, 100);
+}
+type();
+
+
+// Load projects
+let allProjects = [];
+
+fetch("projects.json")
+  .then(res => res.json())
+  .then(data => {
+    allProjects = data;
+    displayProjects(data);
+  });
+
+function displayProjects(projects){
+  const list = document.getElementById("projectList");
+  list.innerHTML = "";
+
+  projects.forEach(p=>{
+    list.innerHTML += `
+      <div class="card">
+        <h3>${p.title}</h3>
+        <p>${p.description}</p>
+        <small>${p.tech}</small><br><br>
+        <a href="${p.github}" target="_blank">GitHub</a>
+      </div>
+    `;
+  });
+}
+
+function filterProjects(cat){
+  if(cat === "all") return displayProjects(allProjects);
+  displayProjects(allProjects.filter(p => p.category === cat));
+}
+
+
+// contact
+document.getElementById("contactForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  alert("Message sent successfully!");
+});
