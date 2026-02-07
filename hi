@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Smart Calculator",
+    "description": "Advanced PWA calculator.",
+    "tech": "HTML CSS JS",
+    "category": "web",
+    "github": "https://github.com/"
+  },
+  {
+    "title": "Student Result System",
+    "description": "Manage marks and reports.",
+    "tech": "Java",
+    "category": "java",
+    "github": "https://github.com/"
+  }
+]
